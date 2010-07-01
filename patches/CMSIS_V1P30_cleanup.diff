@@ -1,0 +1,431 @@
+diff --git a/CM3/CoreSupport/core_cm3.h b/CM3/CoreSupport/core_cm3.h
+index 7ab7b4b..317e376 100644
+--- a/CM3/CoreSupport/core_cm3.h
++++ b/CM3/CoreSupport/core_cm3.h
+@@ -1201,20 +1201,20 @@ extern uint32_t __STREXW(uint32_t value, uint32_t *addr);
+ #elif (defined (__GNUC__)) /*------------------ GNU Compiler ---------------------*/
+ /* GNU gcc specific functions */
+ 
+-static __INLINE void __enable_irq()               { __ASM volatile ("cpsie i"); }
+-static __INLINE void __disable_irq()              { __ASM volatile ("cpsid i"); }
+-
+-static __INLINE void __enable_fault_irq()         { __ASM volatile ("cpsie f"); }
+-static __INLINE void __disable_fault_irq()        { __ASM volatile ("cpsid f"); }
+-
+-static __INLINE void __NOP()                      { __ASM volatile ("nop"); }
+-static __INLINE void __WFI()                      { __ASM volatile ("wfi"); }
+-static __INLINE void __WFE()                      { __ASM volatile ("wfe"); }
+-static __INLINE void __SEV()                      { __ASM volatile ("sev"); }
+-static __INLINE void __ISB()                      { __ASM volatile ("isb"); }
+-static __INLINE void __DSB()                      { __ASM volatile ("dsb"); }
+-static __INLINE void __DMB()                      { __ASM volatile ("dmb"); }
+-static __INLINE void __CLREX()                    { __ASM volatile ("clrex"); }
++static __INLINE void __enable_irq(void)               { __ASM volatile ("cpsie i"); }
++static __INLINE void __disable_irq(void)              { __ASM volatile ("cpsid i"); }
++
++static __INLINE void __enable_fault_irq(void)         { __ASM volatile ("cpsie f"); }
++static __INLINE void __disable_fault_irq(void)        { __ASM volatile ("cpsid f"); }
++
++static __INLINE void __NOP(void)                      { __ASM volatile ("nop"); }
++static __INLINE void __WFI(void)                      { __ASM volatile ("wfi"); }
++static __INLINE void __WFE(void)                      { __ASM volatile ("wfe"); }
++static __INLINE void __SEV(void)                      { __ASM volatile ("sev"); }
++static __INLINE void __ISB(void)                      { __ASM volatile ("isb"); }
++static __INLINE void __DSB(void)                      { __ASM volatile ("dsb"); }
++static __INLINE void __DMB(void)                      { __ASM volatile ("dmb"); }
++static __INLINE void __CLREX(void)                    { __ASM volatile ("clrex"); }
+ 
+ 
+ /**
+diff --git a/CM3/DeviceSupport/Atmel/AT91SAM3U/AT91SAM3U4.h b/CM3/DeviceSupport/Atmel/AT91SAM3U/AT91SAM3U4.h
+index 143f31a..99b210f 100644
+--- a/CM3/DeviceSupport/Atmel/AT91SAM3U/AT91SAM3U4.h
++++ b/CM3/DeviceSupport/Atmel/AT91SAM3U/AT91SAM3U4.h
+@@ -94,8 +94,7 @@ typedef enum IRQn
+ #define __NVIC_PRIO_BITS          4 /**< AT91SAM3U uses 4 Bits for the Priority Levels */
+ #define __Vendor_SysTickConfig    0 /**< Set to 1 if different SysTick Config is used */
+ 
+-#include "core_cm3.h"                       /* Cortex-M3 processor and core peripherals           */
+-#include "system_SAM3U.h"                   /* System Header                                      */
++#include <arm/core_cmd3.h>                       /* Cortex-M3 processor and core peripherals           */
+ /*@}*/
+ 
+ 
+diff --git a/CM3/DeviceSupport/EnergyMicro/EFM32/efm32g200f16.h b/CM3/DeviceSupport/EnergyMicro/EFM32/efm32g200f16.h
+index b592eb0..6fa2fa6 100644
+--- a/CM3/DeviceSupport/EnergyMicro/EFM32/efm32g200f16.h
++++ b/CM3/DeviceSupport/EnergyMicro/EFM32/efm32g200f16.h
+@@ -205,8 +205,7 @@ typedef enum IRQn
+  */
+ 
+ /* Include CMSIS core functionality */
+-#include "core_cm3.h"
+-#include "system_efm32.h"
++#include <arm/core_cmd3.h>
+ #include <stdint.h>
+ 
+ /**************************************************************************//**
+diff --git a/CM3/DeviceSupport/EnergyMicro/EFM32/efm32g200f32.h b/CM3/DeviceSupport/EnergyMicro/EFM32/efm32g200f32.h
+index 11287cc..9280b33 100644
+--- a/CM3/DeviceSupport/EnergyMicro/EFM32/efm32g200f32.h
++++ b/CM3/DeviceSupport/EnergyMicro/EFM32/efm32g200f32.h
+@@ -205,8 +205,7 @@ typedef enum IRQn
+  */
+ 
+ /* Include CMSIS core functionality */
+-#include "core_cm3.h"
+-#include "system_efm32.h"
++#include <arm/core_cmd3.h>
+ #include <stdint.h>
+ 
+ /**************************************************************************//**
+diff --git a/CM3/DeviceSupport/EnergyMicro/EFM32/efm32g200f64.h b/CM3/DeviceSupport/EnergyMicro/EFM32/efm32g200f64.h
+index 267801e..e45290a 100644
+--- a/CM3/DeviceSupport/EnergyMicro/EFM32/efm32g200f64.h
++++ b/CM3/DeviceSupport/EnergyMicro/EFM32/efm32g200f64.h
+@@ -205,8 +205,7 @@ typedef enum IRQn
+  */
+ 
+ /* Include CMSIS core functionality */
+-#include "core_cm3.h"
+-#include "system_efm32.h"
++#include <arm/core_cmd3.h>
+ #include <stdint.h>
+ 
+ /**************************************************************************//**
+diff --git a/CM3/DeviceSupport/EnergyMicro/EFM32/efm32g210f128.h b/CM3/DeviceSupport/EnergyMicro/EFM32/efm32g210f128.h
+index f882802..34e2261 100644
+--- a/CM3/DeviceSupport/EnergyMicro/EFM32/efm32g210f128.h
++++ b/CM3/DeviceSupport/EnergyMicro/EFM32/efm32g210f128.h
+@@ -208,8 +208,7 @@ typedef enum IRQn
+  */
+ 
+ /* Include CMSIS core functionality */
+-#include "core_cm3.h"
+-#include "system_efm32.h"
++#include <arm/core_cmd3.h>
+ #include <stdint.h>
+ 
+ /**************************************************************************//**
+diff --git a/CM3/DeviceSupport/EnergyMicro/EFM32/efm32g230f128.h b/CM3/DeviceSupport/EnergyMicro/EFM32/efm32g230f128.h
+index ed08084..83a649b 100644
+--- a/CM3/DeviceSupport/EnergyMicro/EFM32/efm32g230f128.h
++++ b/CM3/DeviceSupport/EnergyMicro/EFM32/efm32g230f128.h
+@@ -214,8 +214,7 @@ typedef enum IRQn
+  */
+ 
+ /* Include CMSIS core functionality */
+-#include "core_cm3.h"
+-#include "system_efm32.h"
++#include <arm/core_cmd3.h>
+ #include <stdint.h>
+ 
+ /**************************************************************************//**
+diff --git a/CM3/DeviceSupport/EnergyMicro/EFM32/efm32g230f32.h b/CM3/DeviceSupport/EnergyMicro/EFM32/efm32g230f32.h
+index f7c1122..8842dda 100644
+--- a/CM3/DeviceSupport/EnergyMicro/EFM32/efm32g230f32.h
++++ b/CM3/DeviceSupport/EnergyMicro/EFM32/efm32g230f32.h
+@@ -214,8 +214,7 @@ typedef enum IRQn
+  */
+ 
+ /* Include CMSIS core functionality */
+-#include "core_cm3.h"
+-#include "system_efm32.h"
++#include <arm/core_cmd3.h>
+ #include <stdint.h>
+ 
+ /**************************************************************************//**
+diff --git a/CM3/DeviceSupport/EnergyMicro/EFM32/efm32g230f64.h b/CM3/DeviceSupport/EnergyMicro/EFM32/efm32g230f64.h
+index 11b1220..4b4cd4d 100644
+--- a/CM3/DeviceSupport/EnergyMicro/EFM32/efm32g230f64.h
++++ b/CM3/DeviceSupport/EnergyMicro/EFM32/efm32g230f64.h
+@@ -214,8 +214,7 @@ typedef enum IRQn
+  */
+ 
+ /* Include CMSIS core functionality */
+-#include "core_cm3.h"
+-#include "system_efm32.h"
++#include <arm/core_cmd3.h>
+ #include <stdint.h>
+ 
+ /**************************************************************************//**
+diff --git a/CM3/DeviceSupport/EnergyMicro/EFM32/efm32g280f128.h b/CM3/DeviceSupport/EnergyMicro/EFM32/efm32g280f128.h
+index bd857d0..2a49619 100644
+--- a/CM3/DeviceSupport/EnergyMicro/EFM32/efm32g280f128.h
++++ b/CM3/DeviceSupport/EnergyMicro/EFM32/efm32g280f128.h
+@@ -224,8 +224,7 @@ typedef enum IRQn
+  */
+ 
+ /* Include CMSIS core functionality */
+-#include "core_cm3.h"
+-#include "system_efm32.h"
++#include <arm/core_cmd3.h>
+ #include <stdint.h>
+ 
+ /**************************************************************************//**
+diff --git a/CM3/DeviceSupport/EnergyMicro/EFM32/efm32g280f32.h b/CM3/DeviceSupport/EnergyMicro/EFM32/efm32g280f32.h
+index 5621eb2..6504083 100644
+--- a/CM3/DeviceSupport/EnergyMicro/EFM32/efm32g280f32.h
++++ b/CM3/DeviceSupport/EnergyMicro/EFM32/efm32g280f32.h
+@@ -224,8 +224,7 @@ typedef enum IRQn
+  */
+ 
+ /* Include CMSIS core functionality */
+-#include "core_cm3.h"
+-#include "system_efm32.h"
++#include <arm/core_cmd3.h>
+ #include <stdint.h>
+ 
+ /**************************************************************************//**
+diff --git a/CM3/DeviceSupport/EnergyMicro/EFM32/efm32g280f64.h b/CM3/DeviceSupport/EnergyMicro/EFM32/efm32g280f64.h
+index 096f921..58af012 100644
+--- a/CM3/DeviceSupport/EnergyMicro/EFM32/efm32g280f64.h
++++ b/CM3/DeviceSupport/EnergyMicro/EFM32/efm32g280f64.h
+@@ -224,8 +224,7 @@ typedef enum IRQn
+  */
+ 
+ /* Include CMSIS core functionality */
+-#include "core_cm3.h"
+-#include "system_efm32.h"
++#include <arm/core_cmd3.h>
+ #include <stdint.h>
+ 
+ /**************************************************************************//**
+diff --git a/CM3/DeviceSupport/EnergyMicro/EFM32/efm32g290f128.h b/CM3/DeviceSupport/EnergyMicro/EFM32/efm32g290f128.h
+index 217e2e6..e32fe5f 100644
+--- a/CM3/DeviceSupport/EnergyMicro/EFM32/efm32g290f128.h
++++ b/CM3/DeviceSupport/EnergyMicro/EFM32/efm32g290f128.h
+@@ -224,8 +224,7 @@ typedef enum IRQn
+  */
+ 
+ /* Include CMSIS core functionality */
+-#include "core_cm3.h"
+-#include "system_efm32.h"
++#include <arm/core_cmd3.h>
+ #include <stdint.h>
+ 
+ /**************************************************************************//**
+diff --git a/CM3/DeviceSupport/EnergyMicro/EFM32/efm32g290f32.h b/CM3/DeviceSupport/EnergyMicro/EFM32/efm32g290f32.h
+index 5d65de3..439b3c2 100644
+--- a/CM3/DeviceSupport/EnergyMicro/EFM32/efm32g290f32.h
++++ b/CM3/DeviceSupport/EnergyMicro/EFM32/efm32g290f32.h
+@@ -224,8 +224,7 @@ typedef enum IRQn
+  */
+ 
+ /* Include CMSIS core functionality */
+-#include "core_cm3.h"
+-#include "system_efm32.h"
++#include <arm/core_cmd3.h>
+ #include <stdint.h>
+ 
+ /**************************************************************************//**
+diff --git a/CM3/DeviceSupport/EnergyMicro/EFM32/efm32g290f64.h b/CM3/DeviceSupport/EnergyMicro/EFM32/efm32g290f64.h
+index 4625bd3..c132266 100644
+--- a/CM3/DeviceSupport/EnergyMicro/EFM32/efm32g290f64.h
++++ b/CM3/DeviceSupport/EnergyMicro/EFM32/efm32g290f64.h
+@@ -224,8 +224,7 @@ typedef enum IRQn
+  */
+ 
+ /* Include CMSIS core functionality */
+-#include "core_cm3.h"
+-#include "system_efm32.h"
++#include <arm/core_cmd3.h>
+ #include <stdint.h>
+ 
+ /**************************************************************************//**
+diff --git a/CM3/DeviceSupport/EnergyMicro/EFM32/efm32g840f128.h b/CM3/DeviceSupport/EnergyMicro/EFM32/efm32g840f128.h
+index 92f4818..0c9b270 100644
+--- a/CM3/DeviceSupport/EnergyMicro/EFM32/efm32g840f128.h
++++ b/CM3/DeviceSupport/EnergyMicro/EFM32/efm32g840f128.h
+@@ -219,8 +219,7 @@ typedef enum IRQn
+  */
+ 
+ /* Include CMSIS core functionality */
+-#include "core_cm3.h"
+-#include "system_efm32.h"
++#include <arm/core_cmd3.h>
+ #include <stdint.h>
+ 
+ /**************************************************************************//**
+diff --git a/CM3/DeviceSupport/EnergyMicro/EFM32/efm32g840f32.h b/CM3/DeviceSupport/EnergyMicro/EFM32/efm32g840f32.h
+index dd3a680..67dc3d4 100644
+--- a/CM3/DeviceSupport/EnergyMicro/EFM32/efm32g840f32.h
++++ b/CM3/DeviceSupport/EnergyMicro/EFM32/efm32g840f32.h
+@@ -219,8 +219,7 @@ typedef enum IRQn
+  */
+ 
+ /* Include CMSIS core functionality */
+-#include "core_cm3.h"
+-#include "system_efm32.h"
++#include <arm/core_cmd3.h>
+ #include <stdint.h>
+ 
+ /**************************************************************************//**
+diff --git a/CM3/DeviceSupport/EnergyMicro/EFM32/efm32g840f64.h b/CM3/DeviceSupport/EnergyMicro/EFM32/efm32g840f64.h
+index 1c59b3c..8812e09 100644
+--- a/CM3/DeviceSupport/EnergyMicro/EFM32/efm32g840f64.h
++++ b/CM3/DeviceSupport/EnergyMicro/EFM32/efm32g840f64.h
+@@ -219,8 +219,7 @@ typedef enum IRQn
+  */
+ 
+ /* Include CMSIS core functionality */
+-#include "core_cm3.h"
+-#include "system_efm32.h"
++#include <arm/core_cmd3.h>
+ #include <stdint.h>
+ 
+ /**************************************************************************//**
+diff --git a/CM3/DeviceSupport/EnergyMicro/EFM32/efm32g880f128.h b/CM3/DeviceSupport/EnergyMicro/EFM32/efm32g880f128.h
+index 59ce695..45e45c5 100644
+--- a/CM3/DeviceSupport/EnergyMicro/EFM32/efm32g880f128.h
++++ b/CM3/DeviceSupport/EnergyMicro/EFM32/efm32g880f128.h
+@@ -229,8 +229,7 @@ typedef enum IRQn
+  */
+ 
+ /* Include CMSIS core functionality */
+-#include "core_cm3.h"
+-#include "system_efm32.h"
++#include <arm/core_cmd3.h>
+ #include <stdint.h>
+ 
+ /**************************************************************************//**
+diff --git a/CM3/DeviceSupport/EnergyMicro/EFM32/efm32g880f32.h b/CM3/DeviceSupport/EnergyMicro/EFM32/efm32g880f32.h
+index 13051e6..ecef1fd 100644
+--- a/CM3/DeviceSupport/EnergyMicro/EFM32/efm32g880f32.h
++++ b/CM3/DeviceSupport/EnergyMicro/EFM32/efm32g880f32.h
+@@ -229,8 +229,7 @@ typedef enum IRQn
+  */
+ 
+ /* Include CMSIS core functionality */
+-#include "core_cm3.h"
+-#include "system_efm32.h"
++#include <arm/core_cmd3.h>
+ #include <stdint.h>
+ 
+ /**************************************************************************//**
+diff --git a/CM3/DeviceSupport/EnergyMicro/EFM32/efm32g880f64.h b/CM3/DeviceSupport/EnergyMicro/EFM32/efm32g880f64.h
+index d1c482f..509ec80 100644
+--- a/CM3/DeviceSupport/EnergyMicro/EFM32/efm32g880f64.h
++++ b/CM3/DeviceSupport/EnergyMicro/EFM32/efm32g880f64.h
+@@ -229,8 +229,7 @@ typedef enum IRQn
+  */
+ 
+ /* Include CMSIS core functionality */
+-#include "core_cm3.h"
+-#include "system_efm32.h"
++#include <arm/core_cmd3.h>
+ #include <stdint.h>
+ 
+ /**************************************************************************//**
+diff --git a/CM3/DeviceSupport/EnergyMicro/EFM32/efm32g890f128.h b/CM3/DeviceSupport/EnergyMicro/EFM32/efm32g890f128.h
+index 09a88fe..6e1a10b 100644
+--- a/CM3/DeviceSupport/EnergyMicro/EFM32/efm32g890f128.h
++++ b/CM3/DeviceSupport/EnergyMicro/EFM32/efm32g890f128.h
+@@ -229,8 +229,7 @@ typedef enum IRQn
+  */
+ 
+ /* Include CMSIS core functionality */
+-#include "core_cm3.h"
+-#include "system_efm32.h"
++#include <arm/core_cmd3.h>
+ #include <stdint.h>
+ 
+ /**************************************************************************//**
+diff --git a/CM3/DeviceSupport/EnergyMicro/EFM32/efm32g890f32.h b/CM3/DeviceSupport/EnergyMicro/EFM32/efm32g890f32.h
+index 2b095cb..c44e476 100644
+--- a/CM3/DeviceSupport/EnergyMicro/EFM32/efm32g890f32.h
++++ b/CM3/DeviceSupport/EnergyMicro/EFM32/efm32g890f32.h
+@@ -229,8 +229,7 @@ typedef enum IRQn
+  */
+ 
+ /* Include CMSIS core functionality */
+-#include "core_cm3.h"
+-#include "system_efm32.h"
++#include <arm/core_cmd3.h>
+ #include <stdint.h>
+ 
+ /**************************************************************************//**
+diff --git a/CM3/DeviceSupport/EnergyMicro/EFM32/efm32g890f64.h b/CM3/DeviceSupport/EnergyMicro/EFM32/efm32g890f64.h
+index de79280..a0e03c2 100644
+--- a/CM3/DeviceSupport/EnergyMicro/EFM32/efm32g890f64.h
++++ b/CM3/DeviceSupport/EnergyMicro/EFM32/efm32g890f64.h
+@@ -229,8 +229,7 @@ typedef enum IRQn
+  */
+ 
+ /* Include CMSIS core functionality */
+-#include "core_cm3.h"
+-#include "system_efm32.h"
++#include <arm/core_cmd3.h>
+ #include <stdint.h>
+ 
+ /**************************************************************************//**
+diff --git a/CM3/DeviceSupport/NXP/LPC13xx/LPC13xx.h b/CM3/DeviceSupport/NXP/LPC13xx/LPC13xx.h
+index 81a9b5f..ea72ba4 100644
+--- a/CM3/DeviceSupport/NXP/LPC13xx/LPC13xx.h
++++ b/CM3/DeviceSupport/NXP/LPC13xx/LPC13xx.h
+@@ -116,8 +116,7 @@ typedef enum IRQn
+ #define __Vendor_SysTickConfig    0         /*!< Set to 1 if different SysTick Config is used     */
+ 
+ 
+-#include "core_cm3.h"                       /* Cortex-M3 processor and core peripherals           */
+-#include "system_LPC13xx.h"                 /* System Header                                      */
++#include <arm/core_cmd3.h>                       /* Cortex-M3 processor and core peripherals           */
+ 
+ 
+ /******************************************************************************/
+diff --git a/CM3/DeviceSupport/NXP/LPC17xx/LPC17xx.h b/CM3/DeviceSupport/NXP/LPC17xx/LPC17xx.h
+index 0e485ee..ee64c39 100644
+--- a/CM3/DeviceSupport/NXP/LPC17xx/LPC17xx.h
++++ b/CM3/DeviceSupport/NXP/LPC17xx/LPC17xx.h
+@@ -93,8 +93,7 @@ typedef enum IRQn
+ #define __Vendor_SysTickConfig    0         /*!< Set to 1 if different SysTick Config is used     */
+ 
+ 
+-#include "core_cm3.h"                       /* Cortex-M3 processor and core peripherals           */
+-#include "system_LPC17xx.h"                 /* System Header                                      */
++#include <arm/core_cmd3.h>                       /* Cortex-M3 processor and core peripherals           */
+ 
+ 
+ /******************************************************************************/
+diff --git a/CM3/DeviceSupport/ST/STM32F10x/stm32f10x.h b/CM3/DeviceSupport/ST/STM32F10x/stm32f10x.h
+index 373dfde..5239b6a 100644
+--- a/CM3/DeviceSupport/ST/STM32F10x/stm32f10x.h
++++ b/CM3/DeviceSupport/ST/STM32F10x/stm32f10x.h
+@@ -300,8 +300,7 @@ typedef enum IRQn
+   * @}
+   */
+ 
+-#include "core_cm3.h"
+-#include "system_stm32f10x.h"
++#include <arm/core_cmd3.h>
+ #include <stdint.h>
+ 
+ /** @addtogroup Exported_types
+diff --git a/CM3/DeviceSupport/TI/LM3S/lm3s_cmsis.h b/CM3/DeviceSupport/TI/LM3S/lm3s_cmsis.h
+index db6d447..9c7075d 100644
+--- a/CM3/DeviceSupport/TI/LM3S/lm3s_cmsis.h
++++ b/CM3/DeviceSupport/TI/LM3S/lm3s_cmsis.h
+@@ -112,8 +112,7 @@ typedef enum IRQn
+ #define __Vendor_SysTickConfig  0   /*!< 1 if different SysTick config used  */
+ 
+ 
+-#include "core_cm3.h"          /* Cortex-M3 processor and core periphs  */
+-#include "system_lm3s.h"       /* LM3S Stellaris system init            */
++#include <arm/core_cmd3.h>          /* Cortex-M3 processor and core periphs  */
+ 
+ 
+ /**
+diff --git a/CM3/DeviceSupport/Toshiba/TMPM330/TMPM330.h b/CM3/DeviceSupport/Toshiba/TMPM330/TMPM330.h
+index 26398bd..6b97d17 100644
+--- a/CM3/DeviceSupport/Toshiba/TMPM330/TMPM330.h
++++ b/CM3/DeviceSupport/Toshiba/TMPM330/TMPM330.h
+@@ -123,8 +123,7 @@ typedef enum IRQn
+ 
+ /** @} */ /* End of group Configuration_of_CMSIS */
+ 
+-#include "core_cm3.h"                       /* Cortex-M3 processor and core peripherals            */
+-#include "system_TMPM330.h"                 /* TMPM330 System                                      */
++#include <arm/core_cmd3.h>                       /* Cortex-M3 processor and core peripherals            */
+ 
+ /** @addtogroup Device_Peripheral_registers
+   * @{
