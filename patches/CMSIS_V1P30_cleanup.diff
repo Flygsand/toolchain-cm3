@@ -47,7 +47,7 @@ index 143f31a..99b210f 100644
  
 -#include "core_cm3.h"                       /* Cortex-M3 processor and core peripherals           */
 -#include "system_SAM3U.h"                   /* System Header                                      */
-+#include <arm/core_cmd3.h>                       /* Cortex-M3 processor and core peripherals           */
++#include <arm/core_cm3.h>                       /* Cortex-M3 processor and core peripherals           */
  /*@}*/
  
  
@@ -61,7 +61,7 @@ index b592eb0..6fa2fa6 100644
  /* Include CMSIS core functionality */
 -#include "core_cm3.h"
 -#include "system_efm32.h"
-+#include <arm/core_cmd3.h>
++#include <arm/core_cm3.h>
  #include <stdint.h>
  
  /**************************************************************************//**
@@ -75,7 +75,7 @@ index 11287cc..9280b33 100644
  /* Include CMSIS core functionality */
 -#include "core_cm3.h"
 -#include "system_efm32.h"
-+#include <arm/core_cmd3.h>
++#include <arm/core_cm3.h>
  #include <stdint.h>
  
  /**************************************************************************//**
@@ -89,7 +89,7 @@ index 267801e..e45290a 100644
  /* Include CMSIS core functionality */
 -#include "core_cm3.h"
 -#include "system_efm32.h"
-+#include <arm/core_cmd3.h>
++#include <arm/core_cm3.h>
  #include <stdint.h>
  
  /**************************************************************************//**
@@ -103,7 +103,7 @@ index f882802..34e2261 100644
  /* Include CMSIS core functionality */
 -#include "core_cm3.h"
 -#include "system_efm32.h"
-+#include <arm/core_cmd3.h>
++#include <arm/core_cm3.h>
  #include <stdint.h>
  
  /**************************************************************************//**
@@ -117,7 +117,7 @@ index ed08084..83a649b 100644
  /* Include CMSIS core functionality */
 -#include "core_cm3.h"
 -#include "system_efm32.h"
-+#include <arm/core_cmd3.h>
++#include <arm/core_cm3.h>
  #include <stdint.h>
  
  /**************************************************************************//**
@@ -131,7 +131,7 @@ index f7c1122..8842dda 100644
  /* Include CMSIS core functionality */
 -#include "core_cm3.h"
 -#include "system_efm32.h"
-+#include <arm/core_cmd3.h>
++#include <arm/core_cm3.h>
  #include <stdint.h>
  
  /**************************************************************************//**
@@ -145,7 +145,7 @@ index 11b1220..4b4cd4d 100644
  /* Include CMSIS core functionality */
 -#include "core_cm3.h"
 -#include "system_efm32.h"
-+#include <arm/core_cmd3.h>
++#include <arm/core_cm3.h>
  #include <stdint.h>
  
  /**************************************************************************//**
@@ -159,7 +159,7 @@ index bd857d0..2a49619 100644
  /* Include CMSIS core functionality */
 -#include "core_cm3.h"
 -#include "system_efm32.h"
-+#include <arm/core_cmd3.h>
++#include <arm/core_cm3.h>
  #include <stdint.h>
  
  /**************************************************************************//**
@@ -173,7 +173,7 @@ index 5621eb2..6504083 100644
  /* Include CMSIS core functionality */
 -#include "core_cm3.h"
 -#include "system_efm32.h"
-+#include <arm/core_cmd3.h>
++#include <arm/core_cm3.h>
  #include <stdint.h>
  
  /**************************************************************************//**
@@ -187,7 +187,7 @@ index 096f921..58af012 100644
  /* Include CMSIS core functionality */
 -#include "core_cm3.h"
 -#include "system_efm32.h"
-+#include <arm/core_cmd3.h>
++#include <arm/core_cm3.h>
  #include <stdint.h>
  
  /**************************************************************************//**
@@ -201,7 +201,7 @@ index 217e2e6..e32fe5f 100644
  /* Include CMSIS core functionality */
 -#include "core_cm3.h"
 -#include "system_efm32.h"
-+#include <arm/core_cmd3.h>
++#include <arm/core_cm3.h>
  #include <stdint.h>
  
  /**************************************************************************//**
@@ -215,7 +215,7 @@ index 5d65de3..439b3c2 100644
  /* Include CMSIS core functionality */
 -#include "core_cm3.h"
 -#include "system_efm32.h"
-+#include <arm/core_cmd3.h>
++#include <arm/core_cm3.h>
  #include <stdint.h>
  
  /**************************************************************************//**
@@ -229,7 +229,7 @@ index 4625bd3..c132266 100644
  /* Include CMSIS core functionality */
 -#include "core_cm3.h"
 -#include "system_efm32.h"
-+#include <arm/core_cmd3.h>
++#include <arm/core_cm3.h>
  #include <stdint.h>
  
  /**************************************************************************//**
@@ -243,7 +243,7 @@ index 92f4818..0c9b270 100644
  /* Include CMSIS core functionality */
 -#include "core_cm3.h"
 -#include "system_efm32.h"
-+#include <arm/core_cmd3.h>
++#include <arm/core_cm3.h>
  #include <stdint.h>
  
  /**************************************************************************//**
@@ -257,7 +257,7 @@ index dd3a680..67dc3d4 100644
  /* Include CMSIS core functionality */
 -#include "core_cm3.h"
 -#include "system_efm32.h"
-+#include <arm/core_cmd3.h>
++#include <arm/core_cm3.h>
  #include <stdint.h>
  
  /**************************************************************************//**
@@ -271,7 +271,7 @@ index 1c59b3c..8812e09 100644
  /* Include CMSIS core functionality */
 -#include "core_cm3.h"
 -#include "system_efm32.h"
-+#include <arm/core_cmd3.h>
++#include <arm/core_cm3.h>
  #include <stdint.h>
  
  /**************************************************************************//**
@@ -285,7 +285,7 @@ index 59ce695..45e45c5 100644
  /* Include CMSIS core functionality */
 -#include "core_cm3.h"
 -#include "system_efm32.h"
-+#include <arm/core_cmd3.h>
++#include <arm/core_cm3.h>
  #include <stdint.h>
  
  /**************************************************************************//**
@@ -299,7 +299,7 @@ index 13051e6..ecef1fd 100644
  /* Include CMSIS core functionality */
 -#include "core_cm3.h"
 -#include "system_efm32.h"
-+#include <arm/core_cmd3.h>
++#include <arm/core_cm3.h>
  #include <stdint.h>
  
  /**************************************************************************//**
@@ -313,7 +313,7 @@ index d1c482f..509ec80 100644
  /* Include CMSIS core functionality */
 -#include "core_cm3.h"
 -#include "system_efm32.h"
-+#include <arm/core_cmd3.h>
++#include <arm/core_cm3.h>
  #include <stdint.h>
  
  /**************************************************************************//**
@@ -327,7 +327,7 @@ index 09a88fe..6e1a10b 100644
  /* Include CMSIS core functionality */
 -#include "core_cm3.h"
 -#include "system_efm32.h"
-+#include <arm/core_cmd3.h>
++#include <arm/core_cm3.h>
  #include <stdint.h>
  
  /**************************************************************************//**
@@ -341,7 +341,7 @@ index 2b095cb..c44e476 100644
  /* Include CMSIS core functionality */
 -#include "core_cm3.h"
 -#include "system_efm32.h"
-+#include <arm/core_cmd3.h>
++#include <arm/core_cm3.h>
  #include <stdint.h>
  
  /**************************************************************************//**
@@ -355,7 +355,7 @@ index de79280..a0e03c2 100644
  /* Include CMSIS core functionality */
 -#include "core_cm3.h"
 -#include "system_efm32.h"
-+#include <arm/core_cmd3.h>
++#include <arm/core_cm3.h>
  #include <stdint.h>
  
  /**************************************************************************//**
@@ -369,7 +369,7 @@ index 81a9b5f..ea72ba4 100644
  
 -#include "core_cm3.h"                       /* Cortex-M3 processor and core peripherals           */
 -#include "system_LPC13xx.h"                 /* System Header                                      */
-+#include <arm/core_cmd3.h>                       /* Cortex-M3 processor and core peripherals           */
++#include <arm/core_cm3.h>                       /* Cortex-M3 processor and core peripherals           */
  
  
  /******************************************************************************/
@@ -383,7 +383,7 @@ index 0e485ee..ee64c39 100644
  
 -#include "core_cm3.h"                       /* Cortex-M3 processor and core peripherals           */
 -#include "system_LPC17xx.h"                 /* System Header                                      */
-+#include <arm/core_cmd3.h>                       /* Cortex-M3 processor and core peripherals           */
++#include <arm/core_cm3.h>                       /* Cortex-M3 processor and core peripherals           */
  
  
  /******************************************************************************/
@@ -397,7 +397,7 @@ index 373dfde..5239b6a 100644
  
 -#include "core_cm3.h"
 -#include "system_stm32f10x.h"
-+#include <arm/core_cmd3.h>
++#include <arm/core_cm3.h>
  #include <stdint.h>
  
  /** @addtogroup Exported_types
@@ -411,7 +411,7 @@ index db6d447..9c7075d 100644
  
 -#include "core_cm3.h"          /* Cortex-M3 processor and core periphs  */
 -#include "system_lm3s.h"       /* LM3S Stellaris system init            */
-+#include <arm/core_cmd3.h>          /* Cortex-M3 processor and core periphs  */
++#include <arm/core_cm3.h>          /* Cortex-M3 processor and core periphs  */
  
  
  /**
@@ -425,7 +425,7 @@ index 26398bd..6b97d17 100644
  
 -#include "core_cm3.h"                       /* Cortex-M3 processor and core peripherals            */
 -#include "system_TMPM330.h"                 /* TMPM330 System                                      */
-+#include <arm/core_cmd3.h>                       /* Cortex-M3 processor and core peripherals            */
++#include <arm/core_cm3.h>                       /* Cortex-M3 processor and core peripherals            */
  
  /** @addtogroup Device_Peripheral_registers
    * @{
