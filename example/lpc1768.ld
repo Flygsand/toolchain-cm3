@@ -34,19 +34,20 @@ SECTIONS
     __dtors_end = . ;
     KEEP(SORT(*)(.ctors))
     KEEP(SORT(*)(.dtors))
-    _etext = .;
+    __text_end = .;
   } > flash
 
   /* I hope this does what I think it does */
-  .rodata :
+  .rodata : AT (ALIGN(__text_end,4))
   {
     *(.rodata)
     *(.rodata.*)
     *(.gnu.linkonce.r.*)
+    __rodata_end = .;
   } > flash
 
   /* Data section */
-  .data : AT (ALIGN(_etext,4))
+  .data : AT (ALIGN(__rodata_end,4))
   {
     __data_start = .;
     *(.data)
