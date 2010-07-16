@@ -94,7 +94,7 @@ endif
 ###############################################################################
 
 .PHONY: all
-all: gcc gdb insight cmsis
+all: gcc gdb insight cmsis headers
 
 
 ###############################################################################
@@ -285,6 +285,19 @@ $(build)/$(cmsis): $(archive)/$(cmsis_archive)
 $(archive)/$(cmsis_archive):
 	mkdir -p $(archive)
 	cd $(archive) && wget $(cmsis_path)/$(cmsis_archive)
+
+###############################################################################
+### Headers
+###############################################################################
+
+# unofficial header files with stuff I like
+.PHONY: headers
+headers: $(prefix)/$(target)/include/arm/bits.h
+
+# FIXME: Needs to be extended per-header - use $(wildcard ...) ?
+$(prefix)/$(target)/include/arm/bits.h: $(here)/headers/bits.h
+	mkdir -p $(prefix)/$(target)/include/arm
+	cp $(here)/headers/bits.h $(prefix)/$(target)/include/arm
 
 ###############################################################################
 ### Clean
