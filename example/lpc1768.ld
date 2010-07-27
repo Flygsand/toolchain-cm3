@@ -34,11 +34,22 @@ SECTIONS
     __dtors_end = . ;
     KEEP(SORT(*)(.ctors))
     KEEP(SORT(*)(.dtors))
+
+    KEEP(*(.fini))
+
     __text_end = .;
   } > flash
 
+  /* .ARM.exidx is sorted, so has to go in its own output section.  */
+  __exidx_start = .;
+  .ARM.exidx :
+  {
+    *(.ARM.exidx* .gnu.linkonce.armexidx.*)
+  } >flash
+  __exidx_end = .;
+
   /* I hope this does what I think it does */
-  .rodata : AT (ALIGN(__text_end,4))
+  .rodata : AT (ALIGN(__exidx_end,4))
   {
     *(.rodata)
     *(.rodata.*)
@@ -65,12 +76,23 @@ SECTIONS
   /* BSS */
   .bss :
   {
-    __bss_start = .;
+    __bss_start__ = .;
     *(.bss)
     *(.bss.*)
     *(COMMON)
-    __bss_end = .;
+    __bss_end__ = .;
   } > ram
+
+  /* second BSS in AHB ram */
+  .ahbram (NOLOAD) :
+  {
+    __ahbram_start__ = .;
+    *(.ahbram)
+    *(.ahbram.*)
+    __ahbram_end__ = .;
+  } > ahbram
+
+  __heap_start = ALIGN(__bss_end__, 4);
 
   /* Default stack starts at end of ram */
   PROVIDE(__stack = ORIGIN(ram) + LENGTH(ram)) ;

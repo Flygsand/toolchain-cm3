@@ -81,8 +81,8 @@ dataloop:
         blo     dataloop
 
         /* clear bss section */
-        ldr     r0, =__bss_start
-        ldr     r1, =__bss_end
+        ldr     r0, =__bss_start__
+        ldr     r1, =__bss_end__
         ldr     r2, =0
 bssloop:
         str.w   r2, [r0], #4
