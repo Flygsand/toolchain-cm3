@@ -10,7 +10,7 @@
 #define BITBAND(addr,bit) \
   (*((volatile unsigned long *)( \
      ((unsigned long)&(addr) & 0x01ffffff)*32 + \
-      bit*4 + 0x02000000 + ((unsigned long)&(addr) & 0xfe000000) \
+     (bit)*4 + 0x02000000 + ((unsigned long)&(addr) & 0xfe000000)       \
   )))
 
 #endif
