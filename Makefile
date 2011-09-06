@@ -44,17 +44,18 @@ prefix = /opt/$(target)-$(patsubst gcc-%,%,$(gcc))
 sudo      :=
 #sudo      := sudo
 
+wget_opts	:= -t 60 -T 100
 
 here            := $(abspath $(dir $(lastword $(MAKEFILE_LIST))))
 build           := $(here)/build
 archive         := $(here)/archive
 cleandirs       :=
 
-binutils        := binutils-2.19.1
+binutils        := binutils-2.20.1
 binutils_path   := http://ftp.gnu.org/gnu/binutils
 
-gccfile         := gcc-4.4.4
-gcc             := gcc-4.4.4
+gccfile         := gcc-4.4.6
+gcc             := gcc-4.4.6
 gcc_path        := ftp://ftp.fu-berlin.de/unix/languages/gcc/releases
 #gcc_tmp_prefix  := $(build)/gcc-tmp-install
 
@@ -64,7 +65,7 @@ gdb_path        := http://ftp.gnu.org/gnu/gdb
 insight         := insight-6.8-1
 insight_path    := ftp://sourceware.org/pub/insight/releases
 
-newlib          := newlib-1.17.0
+newlib          := newlib-1.19.0
 newlib_path     := ftp://sources.redhat.com/pub/newlib
 
 cmsis           := CMSIS_V1P30
@@ -121,7 +122,7 @@ $(build)/$(binutils): $(archive)/$(binutils).tar.bz2
 
 $(archive)/$(binutils).tar.bz2:
 	mkdir -p $(archive)
-	cd $(archive) && wget $(binutils_path)/$(binutils).tar.bz2
+	cd $(archive) && wget $(wget_opts) $(binutils_path)/$(binutils).tar.bz2
 	touch $@
 
 ###############################################################################
@@ -152,7 +153,7 @@ $(build)/$(gcc): $(archive)/$(gccfile).tar.bz2
 
 $(archive)/$(gccfile).tar.bz2:
 	mkdir -p $(archive)
-	cd $(archive) && wget $(gcc_path)/$(gcc)/$(gccfile).tar.bz2
+	cd $(archive) && wget $(wget_opts) $(gcc_path)/$(gcc)/$(gccfile).tar.bz2
 
 ###############################################################################
 ### Newlib
@@ -182,7 +183,7 @@ $(build)/$(newlib): $(archive)/$(newlib).tar.gz
 
 $(archive)/$(newlib).tar.gz:
 	mkdir -p $(archive)
-	cd $(archive) && wget $(newlib_path)/$(newlib).tar.gz
+	cd $(archive) && wget $(wget_opts) $(newlib_path)/$(newlib).tar.gz
 
 ###############################################################################
 ### GCC final
@@ -228,7 +229,7 @@ $(build)/$(gdb): $(archive)/$(gdb).tar.bz2
 
 $(archive)/$(gdb).tar.bz2:
 	mkdir -p $(archive)
-	cd $(archive) && wget http://ftp.gnu.org/gnu/gdb/$(gdb).tar.bz2
+	cd $(archive) && wget $(wget_opts) $(gdb_path)/$(gdb).tar.bz2
 
 ###############################################################################
 ### Insight
@@ -253,7 +254,7 @@ $(build)/$(insight): $(archive)/$(insight).tar.bz2
 
 $(archive)/$(insight).tar.bz2:
 	mkdir -p $(archive)
-	cd $(archive) && wget $(insight_path)/$(insight).tar.bz2
+	cd $(archive) && wget $(wget_opts) $(insight_path)/$(insight).tar.bz2
 
 ###############################################################################
 ### CMSIS
@@ -284,7 +285,7 @@ $(build)/$(cmsis): $(archive)/$(cmsis_archive)
 
 $(archive)/$(cmsis_archive):
 	mkdir -p $(archive)
-	cd $(archive) && wget $(cmsis_path)/$(cmsis_archive)
+	cd $(archive) && wget $(wget_opts) $(cmsis_path)/$(cmsis_archive)
 
 ###############################################################################
 ### Headers
