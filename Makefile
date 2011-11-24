@@ -260,15 +260,23 @@ $(archive)/$(insight).tar.bz2:
 ### CMSIS
 ###############################################################################
 
-# official header files for both the M0/M3 core and (some of) its implementations
+# official functions for the M3 core
 .PHONY: cmsis
-cmsis: $(prefix)/$(target)/include/arm/core_cm3.h
+cmsis: $(prefix)/$(target)/lib/libcore_cm3.a
 
-# Lazy version, CM3 only, doesn't do any crt/linkscript/core_cm3.c stuff
+# Lazy version, CM3 only, doesn't do any crt/linkscript stuff
 $(prefix)/$(target)/include/arm/core_cm3.h: $(build)/$(cmsis)/.patched
 	mkdir -p $(prefix)/$(target)/include/arm
 	cp $(build)/$(cmsis)/CM3/CoreSupport/core_cm3.h $(prefix)/$(target)/include/arm
 	cd $(build)/$(cmsis)/CM3/DeviceSupport && tar cf - . | (cd $(prefix)/$(target)/include/arm && tar xf -)
+
+# Compile library after header file is installed
+$(build)/$(cmsis)/core_cm3.o: $(prefix)/$(target)/include/arm/core_cm3.h
+	$(target)-gcc -O -o $@ -c $(build)/$(cmsis)/CM3/CoreSupport/core_cm3.c
+
+# Archive into lib
+$(prefix)/$(target)/lib/libcore_cm3.a: $(build)/$(cmsis)/core_cm3.o
+	$(target)-ar rcs $@ $<
 
 # reduce and patch CMSIS - just header files, no startup/system code
 $(build)/$(cmsis)/.patched: $(build)/$(cmsis)
