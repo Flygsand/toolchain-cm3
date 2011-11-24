@@ -46,7 +46,8 @@ sudo      :=
 
 wget_opts	:= -t 60 -T 100
 
-here            := $(abspath $(dir $(lastword $(MAKEFILE_LIST))))
+here_simple     := $(abspath $(dir $(lastword $(MAKEFILE_LIST))))
+here            := $(if $(findstring :,$(here_simple)), /cygdrive/$(subst :,,$(here_simple)),$(here_simple))
 build           := $(here)/build
 archive         := $(here)/archive
 cleandirs       :=
