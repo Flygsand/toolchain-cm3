@@ -52,18 +52,19 @@ build           := $(here)/build
 archive         := $(here)/archive
 cleandirs       :=
 
-binutils        := binutils-2.20.1
+binutils        := binutils-2.22
 binutils_path   := http://ftp.gnu.org/gnu/binutils
 
-gccfile         := gcc-4.4.6
-gcc             := gcc-4.4.6
+gccfile         := gcc-4.6.2
+gcc             := gcc-4.6.2
 gcc_path        := ftp://ftp.fu-berlin.de/unix/languages/gcc/releases
 #gcc_tmp_prefix  := $(build)/gcc-tmp-install
 
-gdb             := gdb-7.1
+gdb             := gdb-7.3.1
 gdb_path        := http://ftp.gnu.org/gnu/gdb
 
-insight         := insight-6.8-1
+insight         := insight-6.8-1a
+insight_dir     := insight-6.8-1
 insight_path    := ftp://sourceware.org/pub/insight/releases
 
 newlib          := newlib-1.19.0
@@ -240,15 +241,15 @@ $(archive)/$(gdb).tar.bz2:
 .PHONY: insight
 insight: $(prefix)/bin/$(target)-insight
 
-$(prefix)/bin/$(target)-insight: $(build)/$(insight)
+$(prefix)/bin/$(target)-insight: $(build)/$(insight_dir)
 	mkdir -p $(build)/obj-$(insight)
-	cd $(build)/obj-$(insight) && $(build)/$(insight)/configure \
+	cd $(build)/obj-$(insight) && $(build)/$(insight_dir)/configure \
 		--target=$(target) --prefix=$(prefix) --disable-nls \
 		--disable-werror
 	cd $(build)/obj-$(insight) && make $(parallel)
 	cd $(build)/obj-$(insight) && $(sudo) make install
 
-$(build)/$(insight): $(archive)/$(insight).tar.bz2
+$(build)/$(insight_dir): $(archive)/$(insight).tar.bz2
 	mkdir -p $(build)
 	cd $(build) && tar xjf $(archive)/$(insight).tar.bz2
 	touch $@
