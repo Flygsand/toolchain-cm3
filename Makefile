@@ -274,11 +274,11 @@ $(prefix)/$(target)/include/arm/core_cm3.h: $(build)/$(cmsis)/.patched
 
 # Compile library after header file is installed
 $(build)/$(cmsis)/core_cm3.o: $(prefix)/$(target)/include/arm/core_cm3.h
-	$(target)-gcc -O -o $@ -c $(build)/$(cmsis)/CM3/CoreSupport/core_cm3.c
+	$(prefix)/bin/$(target)-gcc -O -o $@ -c $(build)/$(cmsis)/CM3/CoreSupport/core_cm3.c
 
 # Archive into lib
 $(prefix)/$(target)/lib/libcore_cm3.a: $(build)/$(cmsis)/core_cm3.o
-	$(target)-ar rcs $@ $<
+	$(prefix)/bin/$(target)-ar rcs $@ $<
 
 # reduce and patch CMSIS - just header files, no startup/system code
 $(build)/$(cmsis)/.patched: $(build)/$(cmsis)

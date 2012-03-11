@@ -1,4 +1,36 @@
 diff --git a/CM3/CoreSupport/core_cm3.h b/CM3/CoreSupport/core_cm3.h
+--- a/CM3/CoreSupport/core_cm3.c        2009-10-30 10:20:04.000000000 +0100
++++ b/CM3/CoreSupport/core_cm3.c        2009-10-30 10:20:04.000000000 +0100
+@@ -732,8 +732,8 @@
+ uint32_t __STREXB(uint8_t value, uint8_t *addr)
+ {
+    uint32_t result=0;
+-  
+-   __ASM volatile ("strexb %0, %2, [%1]" : "=r" (result) : "r" (addr), "r" (value) );
++
++   __ASM volatile ("strexb %0, %2, [%1]" : "=&r" (result) : "r" (addr), "r" (value) );
+    return(result);
+ }
+ 
+@@ -750,7 +750,7 @@
+ {
+    uint32_t result=0;
+   
+-   __ASM volatile ("strexh %0, %2, [%1]" : "=r" (result) : "r" (addr), "r" (value) );
++   __ASM volatile ("strexh %0, %2, [%1]" : "=&r" (result) : "r" (addr), "r" (value) );
+    return(result);
+ }
+ 
+@@ -767,7 +767,7 @@
+ {
+    uint32_t result=0;
+   
+-   __ASM volatile ("strex %0, %2, [%1]" : "=r" (result) : "r" (addr), "r" (value) );
++   __ASM volatile ("strex %0, %2, [%1]" : "=&r" (result) : "r" (addr), "r" (value) );
+    return(result);
+ }
+ 
+diff --git a/CM3/CoreSupport/core_cm3.h b/CM3/CoreSupport/core_cm3.h
 index 7ab7b4b..317e376 100644
 --- a/CM3/CoreSupport/core_cm3.h
 +++ b/CM3/CoreSupport/core_cm3.h
