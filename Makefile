@@ -158,7 +158,10 @@ $(prefix)/bin/$(target)-gccbla: $(build)/$(gcc) | binutils
 
 $(build)/$(gcc): $(archive)/$(gccfile).tar.bz2
 	mkdir -p $(build)
-	cd $(build) && tar xjf $(archive)/$(gccfile).tar.bz2
+	cd $(build) && \
+		tar xjf $(archive)/$(gccfile).tar.bz2 && \
+		patch -p1 < $(here)/patches/gcc_cloog_ldflags.diff && \
+		patch -p1 < $(here)/patches/gcc_gengtype.diff
 	touch $@
 
 $(archive)/$(gccfile).tar.bz2:
