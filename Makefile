@@ -237,7 +237,9 @@ $(prefix)/bin/$(target)-gdb: $(build)/$(gdb)
 
 $(build)/$(gdb): $(archive)/$(gdb).tar.bz2
 	mkdir -p $(build)
-	cd $(build) && tar xjf $(archive)/$(gdb).tar.bz2
+	cd $(build) && \
+		tar xjf $(archive)/$(gdb).tar.bz2 && \
+		patch -p1 < $(here)/patches/gdb_armsupp_wreturn-type.diff
 	touch $@
 
 $(archive)/$(gdb).tar.bz2:
