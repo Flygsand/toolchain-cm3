@@ -87,9 +87,11 @@ else
   path      := $(prefix)/bin:/bin:/usr/bin
 endif
 
-# automatic number-of-cpus detection for Linux
+# automatic number-of-cpus detection for Linux and OS X
 ifeq ($(shell uname), Linux)
   parallel := -j$(shell grep ^processor /proc/cpuinfo|wc -l)
+else ifeq ($(shell uname), Darwin)
+  parallel := -j$(shell sysctl -a | grep machdep.cpu.thread_count | awk '{print $$2}')
 endif
 
 ###############################################################################
