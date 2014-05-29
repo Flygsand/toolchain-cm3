@@ -98,6 +98,8 @@ else ifeq ($(shell uname), Darwin)
                     --with-ppl=/usr/local/opt/ppl011 \
                     --with-cloog=/usr/local/opt/cloog-ppl015 \
                     --with-system-zlib
+  x11_include := CFLAGS=-I/opt/X11/include CPPFLAGS=-I/opt/X11/include CXXFLAGS=-I/opt/X11/include
+  x11_lib := LDFLAGS=-L/opt/X11/lib
 endif
 
 ###############################################################################
@@ -259,7 +261,7 @@ $(prefix)/bin/$(target)-insight: $(build)/$(insight_dir)
 	cd $(build)/obj-$(insight) && $(build)/$(insight_dir)/configure \
 		--target=$(target) --prefix=$(prefix) --disable-nls \
 		--disable-werror
-	cd $(build)/obj-$(insight) && make $(parallel)
+	cd $(build)/obj-$(insight) && make $(x11_include) $(x11_lib) $(parallel)
 	cd $(build)/obj-$(insight) && $(sudo) make install
 
 $(build)/$(insight_dir): $(archive)/$(insight).tar.bz2
