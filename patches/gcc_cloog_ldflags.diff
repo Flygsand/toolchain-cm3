@@ -1,0 +1,11 @@
+--- a/gcc-4.6.2/configure	2011-06-27 22:54:59.000000000 +0200
++++ b/gcc-4.6.2/configure	2014-05-29 17:01:46.000000000 +0200
+@@ -5908,7 +5908,7 @@
+ 
+     CFLAGS="${CFLAGS} ${clooginc} ${gmpinc}"
+   CPPFLAGS="${CPPFLAGS} ${_cloogorginc}"
+-  LDFLAGS="${LDFLAGS} ${clooglibs}"
++  LDFLAGS="${LDFLAGS} ${clooglibs} ${gmplibs}"
+ 
+   case $cloog_backend in
+     "ppl-legacy")

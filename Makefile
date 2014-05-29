@@ -87,9 +87,19 @@ else
   path      := $(prefix)/bin:/bin:/usr/bin
 endif
 
-# automatic number-of-cpus detection for Linux
+# automatic number-of-cpus detection for Linux and OS X
 ifeq ($(shell uname), Linux)
   parallel := -j$(shell grep ^processor /proc/cpuinfo|wc -l)
+else ifeq ($(shell uname), Darwin)
+  parallel := -j$(shell sysctl -a | grep machdep.cpu.thread_count | awk '{print $$2}')
+  gcc_conf_flags := --with-gmp=/usr/local/opt/gmp4 \
+                    --with-mpfr=/usr/local/opt/mpfr2 \
+                    --with-mpc=/usr/local/opt/libmpc08 \
+                    --with-ppl=/usr/local/opt/ppl011 \
+                    --with-cloog=/usr/local/opt/cloog-ppl015 \
+                    --with-system-zlib
+  x11_include := CFLAGS=-I/opt/X11/include CPPFLAGS=-I/opt/X11/include CXXFLAGS=-I/opt/X11/include
+  x11_lib := LDFLAGS=-L/opt/X11/lib
 endif
 
 ###############################################################################
@@ -114,7 +124,7 @@ $(prefix)/bin/$(target)-objdump: $(build)/$(binutils)
 		--target=$(target) \
 		--prefix=$(prefix) --disable-nls \
 		--enable-interwork --disable-multilib \
-		--with-gnu-as --with-gnu-ld
+		--with-gnu-as --with-gnu-ld --disable-werror
 	cd $(build)/obj-$(binutils) && make $(parallel)
 	cd $(build)/obj-$(binutils) && $(sudo) make install
 
@@ -144,13 +154,16 @@ $(prefix)/bin/$(target)-gccbla: $(build)/$(gcc) | binutils
 		--with-cpu=cortex-m3 --with-mode=thumb \
 		--enable-interwork --disable-multilib --enable-languages="c" \
 		--with-newlib --without-headers --disable-shared \
-		--with-gnu-as --with-gnu-ld
+		--with-gnu-as --with-gnu-ld $(gcc_conf_flags)
 	cd $(build)/obj-$(gcc)-tmp && PATH=$(path) make $(parallel) all-gcc
 	cd $(build)/obj-$(gcc)-tmp && PATH=$(path) make install-gcc
 
 $(build)/$(gcc): $(archive)/$(gccfile).tar.bz2
 	mkdir -p $(build)
-	cd $(build) && tar xjf $(archive)/$(gccfile).tar.bz2
+	cd $(build) && \
+		tar xjf $(archive)/$(gccfile).tar.bz2 && \
+		patch -p1 < $(here)/patches/gcc_cloog_ldflags.diff && \
+		patch -p1 < $(here)/patches/gcc_gengtype.diff
 	touch $@
 
 $(archive)/$(gccfile).tar.bz2:
@@ -204,7 +217,7 @@ $(prefix)/bin/$(target)-gccfinal: $(build)/$(gcc) | newlib
 		--with-cpu=cortex-m3 --with-mode=thumb \
 		--enable-interwork --disable-multilib --enable-languages="c,c++" \
 		--with-newlib --disable-shared \
-		--with-gnu-as --with-gnu-ld
+		--with-gnu-as --with-gnu-ld $(gcc_conf_flags)
 	cd $(build)/obj-$(gcc) && PATH=$(path) make $(parallel)
 	cd $(build)/obj-$(gcc) && PATH=$(path) make install
 
@@ -226,7 +239,9 @@ $(prefix)/bin/$(target)-gdb: $(build)/$(gdb)
 
 $(build)/$(gdb): $(archive)/$(gdb).tar.bz2
 	mkdir -p $(build)
-	cd $(build) && tar xjf $(archive)/$(gdb).tar.bz2
+	cd $(build) && \
+		tar xjf $(archive)/$(gdb).tar.bz2 && \
+		patch -p1 < $(here)/patches/gdb_armsupp_wreturn-type.diff
 	touch $@
 
 $(archive)/$(gdb).tar.bz2:
@@ -246,12 +261,14 @@ $(prefix)/bin/$(target)-insight: $(build)/$(insight_dir)
 	cd $(build)/obj-$(insight) && $(build)/$(insight_dir)/configure \
 		--target=$(target) --prefix=$(prefix) --disable-nls \
 		--disable-werror
-	cd $(build)/obj-$(insight) && make $(parallel)
+	cd $(build)/obj-$(insight) && make $(x11_include) $(x11_lib) $(parallel)
 	cd $(build)/obj-$(insight) && $(sudo) make install
 
 $(build)/$(insight_dir): $(archive)/$(insight).tar.bz2
 	mkdir -p $(build)
-	cd $(build) && tar xjf $(archive)/$(insight).tar.bz2
+	cd $(build) && \
+		tar xjf $(archive)/$(insight).tar.bz2 && \
+		patch -p1 < $(here)/patches/insight_armsupp_wreturn-type.diff
 	touch $@
 
 $(archive)/$(insight).tar.bz2:
