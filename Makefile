@@ -92,6 +92,12 @@ ifeq ($(shell uname), Linux)
   parallel := -j$(shell grep ^processor /proc/cpuinfo|wc -l)
 else ifeq ($(shell uname), Darwin)
   parallel := -j$(shell sysctl -a | grep machdep.cpu.thread_count | awk '{print $$2}')
+  gcc_conf_flags := --with-gmp=/usr/local/opt/gmp4 \
+                    --with-mpfr=/usr/local/opt/mpfr2 \
+                    --with-mpc=/usr/local/opt/libmpc08 \
+                    --with-ppl=/usr/local/opt/ppl011 \
+                    --with-cloog=/usr/local/opt/cloog-ppl015 \
+                    --with-system-zlib
 endif
 
 ###############################################################################
@@ -146,7 +152,7 @@ $(prefix)/bin/$(target)-gccbla: $(build)/$(gcc) | binutils
 		--with-cpu=cortex-m3 --with-mode=thumb \
 		--enable-interwork --disable-multilib --enable-languages="c" \
 		--with-newlib --without-headers --disable-shared \
-		--with-gnu-as --with-gnu-ld
+		--with-gnu-as --with-gnu-ld $(gcc_conf_flags)
 	cd $(build)/obj-$(gcc)-tmp && PATH=$(path) make $(parallel) all-gcc
 	cd $(build)/obj-$(gcc)-tmp && PATH=$(path) make install-gcc
 
@@ -206,7 +212,7 @@ $(prefix)/bin/$(target)-gccfinal: $(build)/$(gcc) | newlib
 		--with-cpu=cortex-m3 --with-mode=thumb \
 		--enable-interwork --disable-multilib --enable-languages="c,c++" \
 		--with-newlib --disable-shared \
-		--with-gnu-as --with-gnu-ld
+		--with-gnu-as --with-gnu-ld $(gcc_conf_flags)
 	cd $(build)/obj-$(gcc) && PATH=$(path) make $(parallel)
 	cd $(build)/obj-$(gcc) && PATH=$(path) make install
 
