@@ -264,7 +264,9 @@ $(prefix)/bin/$(target)-insight: $(build)/$(insight_dir)
 
 $(build)/$(insight_dir): $(archive)/$(insight).tar.bz2
 	mkdir -p $(build)
-	cd $(build) && tar xjf $(archive)/$(insight).tar.bz2
+	cd $(build) && \
+		tar xjf $(archive)/$(insight).tar.bz2 && \
+		patch -p1 < $(here)/patches/insight_armsupp_wreturn-type.diff
 	touch $@
 
 $(archive)/$(insight).tar.bz2:
