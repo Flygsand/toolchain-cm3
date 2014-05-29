@@ -116,7 +116,7 @@ $(prefix)/bin/$(target)-objdump: $(build)/$(binutils)
 		--target=$(target) \
 		--prefix=$(prefix) --disable-nls \
 		--enable-interwork --disable-multilib \
-		--with-gnu-as --with-gnu-ld
+		--with-gnu-as --with-gnu-ld --disable-werror
 	cd $(build)/obj-$(binutils) && make $(parallel)
 	cd $(build)/obj-$(binutils) && $(sudo) make install
 
