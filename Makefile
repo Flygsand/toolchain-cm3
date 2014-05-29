@@ -72,7 +72,7 @@ newlib_path     := ftp://sources.redhat.com/pub/newlib
 
 cmsis           := CMSIS_V1P30
 cmsis_archive   := cmsis_v1p30.zip
-cmsis_path      := http://www.onarm.com/download/files
+cmsis_path      := http://github.com/protomouse/toolchain-cm3-deps/raw/master
 
 #target          := armv7m-none-eabi
 target          := arm-none-eabi
